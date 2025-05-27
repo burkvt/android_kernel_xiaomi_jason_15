@@ -13,12 +13,25 @@ jobs:
       image: ubuntu:22.04
 
     steps:
-      - name: Install Dependencies
+      - name: Checkout This Repo
+        uses: actions/checkout@v4
+
+      - name: Install Base Dependencies
         run: |
           apt update
-          apt install -y git build-essential libncurses-dev flex bison libssl-dev clang-16 gcc
+          apt install -y git build-essential libncurses-dev flex bison libssl-dev wget gnupg software-properties-common
 
-      - name: Set up Environment
+      - name: Add LLVM Repository for Clang-16
+        run: |
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+          add-apt-repository -y "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-16 main"
+          apt update
+
+      - name: Install Clang-16 and Tools
+        run: |
+          apt install -y clang-16 lld-16 lldb-16
+
+      - name: Set CC to Clang-16 in PATH
         run: |
           echo "PATH=/usr/lib/llvm-16/bin:$PATH" >> $GITHUB_ENV
 
@@ -42,7 +55,7 @@ jobs:
       - name: Build Kernel
         working-directory: kernel
         run: |
-          make O=out ARCH=arm64 CC=clang -j$(nproc)
+          make O=out ARCH=arm64 CC=clang-16 -j$(nproc)
 
       - name: Archive Artifact
         uses: actions/upload-artifact@v4
