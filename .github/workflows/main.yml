@@ -1,0 +1,52 @@
+name: Build Kernel TongYi
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-kernel:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:22.04
+
+    steps:
+      - name: Install Dependencies
+        run: |
+          apt update
+          apt install -y git build-essential libncurses-dev flex bison libssl-dev clang-16 gcc
+
+      - name: Set up Environment
+        run: |
+          echo "PATH=/usr/lib/llvm-16/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Clone Kernel Source
+        run: |
+          git clone https://github.com/burkvt/android_kernel_xiaomi_jason_15 kernel
+
+      - name: Fix fixdep with GCC
+        working-directory: kernel/scripts/basic/
+        run: |
+          make clean
+          make CC=gcc fixdep
+
+      - name: Configure Kernel with VDSO Disabled
+        working-directory: kernel
+        run: |
+          make O=out ARCH=arm64 jason_defconfig
+          echo "CONFIG_ARM64_VDSO=n" >> out/.config
+          make O=out olddefconfig
+
+      - name: Build Kernel
+        working-directory: kernel
+        run: |
+          make O=out ARCH=arm64 CC=clang -j$(nproc)
+
+      - name: Archive Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: kernel-image
+          path: kernel/out/arch/arm64/boot/Image.gz-dtb
