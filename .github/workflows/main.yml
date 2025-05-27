@@ -37,6 +37,7 @@ jobs:
 
       - name: Clone Kernel Source
         run: |
+          rm -rf kernel
           git clone https://github.com/burkvt/android_kernel_xiaomi_jason_15 kernel
 
       - name: Fix fixdep with GCC
