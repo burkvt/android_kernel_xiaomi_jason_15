@@ -3,7 +3,8 @@ name: Build Kernel
 
 on:
   push:
-    branches: ["15.0"]
+    paths:
+      - ".github/workflows/build-crdroid-15.yml"
   workflow_dispatch:
 
 jobs:
