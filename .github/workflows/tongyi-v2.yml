@@ -42,7 +42,7 @@ jobs:
 
     - name: Upload Artifact
       if: success() # 仅当构建成功时上传制品
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: kernel-build
         path: out/arch/arm64/boot/Image.gz-dtb # 假设这是生成的内核镜像路径
