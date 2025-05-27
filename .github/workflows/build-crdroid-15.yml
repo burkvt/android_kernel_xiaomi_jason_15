@@ -27,8 +27,8 @@ jobs:
           other-gcc64-url: https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3
           other-gcc64-branch: "15.0"
           aosp-clang: false
-          other-clang-url: https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-vortex
-          other-clang-branch: "15.0"
+          other-clang-url: https://gitlab.com/ThankYouMario/android_prebuilts_clang-standalone
+          other-clang-branch: 18
           # android-version: 15
           # aosp-clang-version: r522817
           disable-lto: true
