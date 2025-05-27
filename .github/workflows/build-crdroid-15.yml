@@ -1,0 +1,31 @@
+# A simple action usage
+name: Build Kernel
+
+on:
+  push:
+    branches: ["15.0"]
+  workflow_dispatch:
+
+jobs:
+  Build-Kernel:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+
+    steps:
+      - name: Build Kernel
+        uses: dabao1955/kernel_build_action@main
+        with:
+          kernel-url: https://github.com/burkvt/android_kernel_xiaomi_jason_15
+          kernel-dir: kernel
+          kernel-branch: 15.0
+          config: jason_defconfig
+          arch: arm64
+          aosp-gcc: true
+          aosp-clang: true
+          android-version: 15
+          aosp-clang-version: r498229b
+          disable-lto: true
+          anykernel3: true
