@@ -2,9 +2,9 @@ name: Build Kernel TongYi
 
 on:
   push:
-    branches: [main]
+    branches: ["15.0"]
   pull_request:
-    branches: [main]
+    branches: ["15.0"]
   workflow_dispatch:
 
 jobs:
