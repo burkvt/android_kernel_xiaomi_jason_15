@@ -1,12 +1,9 @@
-name: Build Kernel
+name: TongYi-v2
 
 on:
   push:
-    branches:
-      - main # 触发条件，这里设置为push到main分支时触发
-  pull_request:
-    branches:
-      - main # 可选：PR到main分支时也触发
+    paths:
+      - ".github/workflows/tongyi-v2.yml"
 
 jobs:
   build:
