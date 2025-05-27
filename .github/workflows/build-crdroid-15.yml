@@ -24,7 +24,7 @@ jobs:
           kernel-branch: "15.0"
           config: jason_defconfig
           arch: arm64
-          aosp-gcc: false
+          aosp-gcc: true
           other-gcc64-url: https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3
           other-gcc64-branch: "15.0"
           aosp-clang: true
