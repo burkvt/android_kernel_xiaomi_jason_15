@@ -29,7 +29,7 @@ jobs:
           other-gcc64-branch: "15.0"
           aosp-clang: false
           other-clang-url: https://gitlab.com/ThankYouMario/android_prebuilts_clang-standalone
-          other-clang-branch: 18
+          other-clang-branch: 17
           # android-version: 15
           # aosp-clang-version: r522817
           disable-lto: true
