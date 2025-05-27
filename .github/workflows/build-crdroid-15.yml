@@ -29,7 +29,7 @@ jobs:
           aosp-clang: false
           other-clang-url: https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r536225
           other-clang-branch: "15.0"
-          android-version: 15
+          # android-version: 15
           # aosp-clang-version: r522817
           disable-lto: true
           anykernel3: true
