@@ -34,6 +34,6 @@ jobs:
           aosp-clang-version: r383902
           disable-lto: true
           anykernel3: true
-          extra-cmd: CC=gcc
+          extra-cmd: CC=gcc KBUILD_CFLAGS="-Wall -Wno-error"
           lxc: true
           lxc-patch: true
